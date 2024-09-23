@@ -9,6 +9,7 @@ import entities.Contract;
 import entities.Installment;
 import services.ContractService;
 import services.PaypalService;
+import services.PicPayService;
 
 public class Program {
 
@@ -33,7 +34,15 @@ public class Program {
 		System.out.print("Enter with the number of installments: ");
 		int numberInstallments = sc.nextInt();
 		
-		ContractService contractService = new ContractService(new PaypalService());
+		ContractService contractService = null;
+		System.out.print("Enter with the contract service (1 = PicPay or 2 = PayPal): ");
+		int cont = sc.nextInt();
+		
+		if(cont == 1) {
+			contractService = new ContractService(new PicPayService());
+		} else {
+			contractService = new ContractService(new PaypalService());
+		}
 		
 		contractService.processContract(contract, numberInstallments);
 		
