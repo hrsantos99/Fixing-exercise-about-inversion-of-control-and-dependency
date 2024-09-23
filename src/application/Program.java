@@ -40,8 +40,10 @@ public class Program {
 		
 		if(cont == 1) {
 			contractService = new ContractService(new PicPayService());
-		} else {
+		} else if(cont == 2) {
 			contractService = new ContractService(new PaypalService());
+		} else {
+			System.out.println("Invalid contract service!");
 		}
 		
 		contractService.processContract(contract, numberInstallments);
